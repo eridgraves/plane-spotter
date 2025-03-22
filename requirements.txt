@@ -1,0 +1,11 @@
+# Core dependencies
+opencv-python>=4.6.0
+numpy>=1.21.0
+picamera2>=0.3.9
+schedule>=1.1.0
+Pillow>=9.0.0
+
+# Test dependencies
+pytest>=7.0.0
+pytest-cov>=4.0.0
+mock>=4.0.3

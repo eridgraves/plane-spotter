@@ -1,0 +1,57 @@
+# User configuration for the Plane Spotter System
+# Customize these settings for your specific deployment
+# This file overrides values from default_config.yaml
+
+# General settings
+output_dir: "/home/pi/plane_spotter/captured_images"  # Path to store images
+log_level: "INFO"  # Set to DEBUG for more detailed logs during setup
+
+# Camera settings
+camera:
+  # For Raspberry Pi Camera Module
+  type: "picamera"  
+  image_width: 1920
+  image_height: 1080
+  
+  # Uncomment and adjust for fixed exposure settings
+  # exposure_time: 8000  # Shorter for bright days, longer for dusk/dawn
+  # iso: 200            # Lower for bright days, higher for dusk/dawn
+  
+  # Uncomment for camera rotation if needed
+  # rotation: 180       # Rotate if camera is mounted upside down
+  
+  # For USB webcam instead of Pi Camera, uncomment the following:
+  # type: "webcam"
+  # webcam_index: 0     # First webcam device
+
+# Detection settings
+detection:
+  mode: "continuous"    # Use "scheduled" for time-based captures
+  
+  # Adjust based on expected plane size in your images
+  min_contour_area: 1200  # Increase if detecting clouds or other large objects
+  
+  # Background subtraction sensitivity
+  bg_history: 300       # Lower for faster adaptation to lighting changes
+  bg_threshold: 20      # Higher for less sensitive detection
+  
+  # Cooldown to avoid multiple shots of the same plane
+  detection_cooldown: 10  # Seconds between captures
+  
+  # Uncomment to use trained object detection (requires model file)
+  # use_object_detection: true
+  # model_path: "/home/pi/plane_spotter/models/aircraft_cascade.xml"
+
+# Scheduling settings (if using "scheduled" mode)
+scheduling:
+  # Customize for the times planes typically fly over
+  capture_interval_minutes: 10
+  active_hours_start: 8   # Start at 8:00 AM
+  active_hours_end: 18    # End at 6:00 PM
+
+# Image processing settings
+processing:
+  save_raw: true
+  save_processed: true
+  bbox_padding_percent: 30  # More padding around the plane
+  enhance_contrast: true    # Improve image contrast for better visibility

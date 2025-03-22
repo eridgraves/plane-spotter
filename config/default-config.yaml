@@ -1,0 +1,42 @@
+# Default configuration for the Plane Spotter System
+# These settings provide a good starting point for most deployments
+
+# General settings
+output_dir: "plane_images"  # Directory to store captured images
+log_level: "INFO"  # Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+
+# Camera settings
+camera:
+  type: "picamera"          # Camera type: 'picamera' or 'webcam'
+  image_width: 1920         # Image width in pixels
+  image_height: 1080        # Image height in pixels
+  framerate: 30             # Camera framerate
+  exposure_time: 16000      # Exposure time in microseconds (auto if not specified)
+  iso: 400                  # ISO setting (auto if not specified)
+  awb_mode: "auto"          # Auto white balance mode
+  rotation: 0               # Camera rotation in degrees (0, 90, 180, 270)
+  webcam_index: 0           # Index of webcam device (if using webcam)
+
+# Detection settings
+detection:
+  mode: "continuous"        # Operation mode: 'continuous' or 'scheduled'
+  process_every_n_frames: 3 # Process only every Nth frame to reduce CPU usage
+  min_contour_area: 1000    # Minimum contour area to consider as a potential plane
+  bg_history: 500           # Background subtractor history length
+  bg_threshold: 16          # Background subtractor threshold
+  detection_cooldown: 15    # Cooldown in seconds after detecting a plane
+  use_object_detection: false  # Whether to use trained object detection model
+  model_path: "models/aircraft_cascade.xml"  # Path to detection model
+
+# Scheduling settings (if mode is 'scheduled')
+scheduling:
+  capture_interval_minutes: 5  # Interval between scheduled captures
+  active_hours_start: 6        # Hour to start scheduled captures (24h format)
+  active_hours_end: 20         # Hour to end scheduled captures (24h format)
+
+# Image processing settings
+processing:
+  save_raw: true              # Save the original images
+  save_processed: true        # Save the cropped/processed images
+  bbox_padding_percent: 20    # Padding percentage around detected objects
+  enhance_contrast: false     # Apply contrast enhancement to captured images
