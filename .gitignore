@@ -1,0 +1,22 @@
+# Captured images
+captured_images/
+plane_images/
+*.jpg
+*.png
+
+# Configuration
+config/user_config.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Logs
+*.log
+logs/
+
+# System files
+.DS_Store
